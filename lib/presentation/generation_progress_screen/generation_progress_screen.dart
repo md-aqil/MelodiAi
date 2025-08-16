@@ -467,37 +467,68 @@ class _GenerationProgressScreenState extends State<GenerationProgressScreen>
   Widget _buildProgressContent() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 6.w),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Animated waveform
-          AnimatedWaveformWidget(
-            progress: _progress,
-            isActive: _isGenerating,
-          ),
-
-          SizedBox(height: 6.h),
-
-          // Progress indicator
-          ProgressIndicatorWidget(
-            progress: _progress,
-            isActive: _isGenerating,
-          ),
-
-          SizedBox(height: 4.h),
-
-          // Status message
-          StatusMessageWidget(
-            message: _currentStatus,
-            taskId: _taskId,
-            estimatedTime: _estimatedTime,
-            queuePosition: _queuePosition,
-            totalQueue: _totalQueue,
-          ),
-        ],
+      child: Center(
+        // 👈 constrain + center safely
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // 👈 prevent infinite growth
+          children: [
+            AnimatedWaveformWidget(
+              progress: _progress,
+              isActive: _isGenerating,
+            ),
+            // SizedBox(height: 6.h),
+            ProgressIndicatorWidget(
+              progress: _progress,
+              isActive: _isGenerating,
+            ),
+            SizedBox(height: 4.h),
+            StatusMessageWidget(
+              message: _currentStatus,
+              taskId: _taskId,
+              estimatedTime: _estimatedTime,
+              queuePosition: _queuePosition,
+              totalQueue: _totalQueue,
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  // Widget _buildProgressContent() {
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(horizontal: 6.w),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         // Animated waveform
+  //         AnimatedWaveformWidget(
+  //           progress: _progress,
+  //           isActive: _isGenerating,
+  //         ),
+
+  //         SizedBox(height: 6.h),
+
+  //         // Progress indicator
+  //         ProgressIndicatorWidget(
+  //           progress: _progress,
+  //           isActive: _isGenerating,
+  //         ),
+
+  //         SizedBox(height: 4.h),
+
+  //         // Status message
+  //         StatusMessageWidget(
+  //           message: _currentStatus,
+  //           taskId: _taskId,
+  //           estimatedTime: _estimatedTime,
+  //           queuePosition: _queuePosition,
+  //           totalQueue: _totalQueue,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildSuccessContent() {
     return Container(

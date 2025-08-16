@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import '../core/app_export.dart';
 import '../widgets/custom_error_widget.dart';
+import 'no_mouse.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,11 @@ void main() async {
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
-    runApp(MyApp());
+    runApp(
+      NoMouseApp(
+        child: MyApp(),
+      ),
+    );
   });
 }
 
